@@ -43,7 +43,6 @@ typedef NS_ENUM(int, CTSoftPhoneCallState) {
 - (instancetype _Nonnull)init NS_UNAVAILABLE;
 
 - (void)registerWithNumber:(NSString *_Nonnull)number
-                   withHost:(NSString*_Nonnull)host
             withCredentials:(NSString *_Nonnull)credentials;
 - (void)handleIpChange:(CTSoftPhoneTransportType)transport;
 - (void)destroy;
@@ -52,6 +51,7 @@ typedef NS_ENUM(int, CTSoftPhoneCallState) {
 - (void)unmute;
 - (void)speakeron;
 - (void)speakeroff;
+- (void)makeCallWithMobileNumber:(NSString *_Nonnull)mobileNumber;
 
 @end
 
