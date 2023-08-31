@@ -4,16 +4,19 @@
 @interface CTSoftPhoneConfig () {}
 
 @property (nonatomic, assign, readwrite) int port;
+@property (nonatomic, strong, readwrite) NSString * _Nullable host;
 @property (nonatomic, assign, readwrite) CTSoftPhoneTransportType transport;
 
 @end
 
 @implementation CTSoftPhoneConfig
 
-- (instancetype _Nonnull)initWithPort:(int)port
+- (instancetype _Nonnull)initWithHost:(NSString *_Nonnull)host
+                                 port:(int)port
                             transport:(CTSoftPhoneTransportType)transport {
-    self = [self init];
+    self = [super init];
     if (self) {
+        self.host = [host copy];
         self.port = port;
         self.transport = transport;
     }
