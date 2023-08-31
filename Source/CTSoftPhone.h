@@ -52,6 +52,7 @@ typedef NS_ENUM(int, CTSoftPhoneCallState) {
 - (void)unmute;
 - (void)speakeron;
 - (void)speakeroff;
+- (void)makeCallWithMobileNumber:(NSString *_Nonnull)mobileNumber;
 
 @end
 
