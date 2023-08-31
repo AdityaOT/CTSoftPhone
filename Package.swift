@@ -19,8 +19,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "CTSoftPhone",
-            url: "https://github.com/AdityaOT/CTSoftPhone/blob/main/Release/CTSoftPhone.xcframework.zip",
-            checksum: "1a528c082c0f75ef0ed2e24fc62896e2f14484bd"
+            url: "https://github.com/AdityaOT/SipFramework/blob/main/CTSoftPhone.xcframework.zip",
+            checksum: "b59fa0cb375f5f0ff1cd09d2eae2675c"
         )
     ]
 )
