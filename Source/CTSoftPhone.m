@@ -445,6 +445,46 @@ static const void *const kQueueKey = &kQueueKey;
     }
 }
 
+- (void)makeCallWithMobileNumber:(NSString *)mobileNumber {
+    [self runAsync:^{
+        @try {
+            [self registerThread];
+            
+            if (!self.pjsuaInitialized) {
+                CTSoftPhone_Log(CTSoftPhoneLogInfo, "Cannot make call. PJSUA is not initialized.");
+                return;
+            }
+            
+            if (acc_id < 0) {
+                CTSoftPhone_Log(CTSoftPhoneLogInfo, "Cannot make call. Account is not registered.");
+                return;
+            }
+            
+            if (mobileNumber.length == 0) {
+                CTSoftPhone_Log(CTSoftPhoneLogInfo, "Cannot make call. Invalid mobile number.");
+                return;
+            }
+            
+            NSString *sipUri = [NSString stringWithFormat:@"sip:%@@%@", mobileNumber, self.config.domain];
+            const char *uri = [sipUri UTF8String];
+            
+            pjsua_call_id call_id;
+            pj_str_t dest_uri = pj_str((char *)uri);
+            pj_status_t status = pjsua_call_make_call(acc_id, &dest_uri, 0, NULL, NULL, &call_id);
+            
+            if (status != PJ_SUCCESS) {
+                CTSoftPhone_Log(CTSoftPhoneLogInfo, "Error making call");
+                return;
+            }
+            
+            setCallid(call_id);
+            [[CTSoftPhone class] onCallState:CTSoftPhoneCallStateCalling];
+        } @catch (NSException *exception) {
+            CTSoftPhone_Log(CTSoftPhoneLogDebug, "makeCallWithMobileNumber: %@", exception);
+        }
+    }];
+}
+
 - (void)onRegistrationState:(CTSoftPhoneRegistrationState)state {
     [self.delegate onRegistrationState:state];
 }
