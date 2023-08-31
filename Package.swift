@@ -13,9 +13,6 @@ let package = Package(
             targets: ["CTSoftPhone"]
         )
     ],
-    dependencies: [
-        .package(url: "https://github.com/AdityaOT/CTSoftPhone.git", from: "1.1.10") // Replace with your forked repository URL and desired version
-    ],
     targets: [
         .binaryTarget(
             name: "CTSoftPhone",
