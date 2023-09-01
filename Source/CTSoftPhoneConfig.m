@@ -16,7 +16,7 @@
                             transport:(CTSoftPhoneTransportType)transport {
     self = [super init];
     if (self) {
-        self.host = [host copy];
+        self.host = host;
         self.port = port;
         self.transport = transport;
     }
